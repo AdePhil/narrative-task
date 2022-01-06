@@ -3,7 +3,7 @@
     <div class="container">
       <div class="mt-6 d-flex justify-space-between align-center mb-6">
         <h3 class="mt-0 mb-0 headline">Buyers Order</h3>
-        <NioButton>
+        <NioButton @click="handleShowForm">
           <nio-icon name="utility-plus" size="16" color="#fff"></nio-icon>
           &nbsp; Add Order
         </NioButton>
@@ -24,33 +24,45 @@
         >
           <template v-slot:item-menu="slotProps">
             <v-list>
-              <v-list-item
-                @click="menuItemClicked('updateBudget', slotProps.item)"
-              >
-                Update Order
+              <v-list-item @click="handleEditForm(slotProps.item)">
+                Edit
               </v-list-item>
-              <v-list-item
-                @click="menuItemClicked('updateBudget', slotProps.item)"
-              >
-                Delete Order
+              <v-list-item @click="removeBuyerOrder(slotProps.item.id)">
+                Delete
               </v-list-item>
             </v-list>
           </template>
         </nio-slat-table>
       </div>
+      <buyer-orders-form
+        :showForm="showForm"
+        @handleShowForm="handleShowForm"
+        @handleHideForm="handleHideForm"
+        :dataPackageOptions="dataPackageOptions"
+        @saveCallback="saveCallback"
+        :selectedOrder="selectedOrder"
+      />
     </div>
   </div>
 </template>
 
 <script>
+import BuyerOrdersForm from "../components/BuyerOrdersForm.vue";
 import Loader from "../components/Loader.vue";
-import { getBuyerOrders } from "../services/buyerorder";
+import {
+  getBuyerOrders,
+  getDataPackageType,
+  deleteBuyerOrder,
+} from "../services/buyerorder";
 export default {
   name: "Home",
-  components: { Loader },
+  components: { Loader, BuyerOrdersForm },
   data() {
     return {
+      selectedOrder: {},
+      showForm: false,
       loading: false,
+      dataPackageOptions: [],
       columns: null,
       searchableProps: ["name", "package_name", "max_bid_price"],
       sortOptions: [
@@ -63,26 +75,10 @@ export default {
           },
         },
         {
-          label: "Alphabetic [Z-A]",
+          label: "Name [Z-A]",
           value: {
-            itemProp: "orderName",
+            itemProp: "name",
             propType: "String",
-            order: "descending",
-          },
-        },
-        {
-          label: "Order number (lowest first)",
-          value: {
-            itemProp: "orderNumber",
-            propType: "Number",
-            order: "asscending",
-          },
-        },
-        {
-          label: "Order number (highest first)",
-          value: {
-            itemProp: "orderNumber",
-            propType: "Number",
             order: "descending",
           },
         },
@@ -91,22 +87,65 @@ export default {
     };
   },
   methods: {
-    getBuyerOrders,
-    fetchBuyerOrders() {
+    handleShowForm() {
+      this.showForm = true;
+    },
+    handleHideForm() {
+      this.showForm = false;
+    },
+    removeBuyerOrder(id) {
       this.loading = true;
-      getBuyerOrders()
-        .then((res) => {
-          this.items = res.data.data.map((item) => ({
-            package_name: item?.data_package_type?.name,
-            ...item,
-          }));
+      deleteBuyerOrder(id)
+        .then(() => {
+          this.fetchBuyerOrders();
         })
-        .catch((error) => {
-          console.log(error);
-        })
-        .finally(() => {
+        .catch(() => {
           this.loading = false;
         });
+    },
+    handleEditForm(item) {
+      this.selectedOrder = {
+        id: item.id,
+        name: item.name,
+        max_bid_price: item.max_bid_price,
+        data_package_type_id: item.data_package_type_id,
+      };
+      this.handleShowForm();
+    },
+    saveCallback() {
+      this.handleHideForm();
+      this.fetchBuyerOrders();
+    },
+    fetchBuyerOrders() {
+      this.loading = true;
+      //simulate network request
+      window.setTimeout(() => {
+        getBuyerOrders()
+          .then((res) => {
+            this.items = res.data.map((item) => ({
+              package_name: item?.data_package_type?.name,
+              ...item,
+            }));
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+          .finally(() => {
+            this.loading = false;
+          });
+      }, 1500);
+    },
+    async fetchDataPackageType() {
+      try {
+        const res = await getDataPackageType();
+        this.dataPackageOptions = res.data.map((dataPackage) => ({
+          ...dataPackage,
+          text: dataPackage.name,
+          value: dataPackage.id,
+        }));
+      } catch (error) {
+        console.log(error.message);
+      }
     },
     menuItemClicked() {},
     makeColumns() {
@@ -134,6 +173,7 @@ export default {
   },
   mounted() {
     this.fetchBuyerOrders();
+    this.fetchDataPackageType();
     this.makeColumns();
   },
 };
