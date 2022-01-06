@@ -3,7 +3,7 @@ const buyerOrderController = require("../controller/buyerOrder");
 
 router.post("/create", buyerOrderController.createBuyerOrder);
 router.get("/all", buyerOrderController.findAllBuyerOrder);
-router.delete("/delete/:id", buyerOrderController.updateBuyerOrder);
-router.patch("/update", buyerOrderController.deleteBuyerOrder);
+router.delete("/:id", buyerOrderController.deleteBuyerOrder);
+router.patch("/:id", buyerOrderController.updateBuyerOrder);
 
 module.exports = router;

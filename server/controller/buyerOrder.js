@@ -29,16 +29,15 @@ const findAllBuyerOrder = async (req, res) => {
 };
 
 const updateBuyerOrder = async (req, res) => {
-  const { id, ...rest } = res.body;
+  const { id } = req.params;
+  console.log({ id }, req.body);
   try {
-    const buyerOrder = await BuyerOrder.update(rest, {
+    const buyerOrder = await BuyerOrder.update(req.body, {
       where: {
         id,
       },
     });
-    return res
-      .status(200)
-      .json({ message: "order updated successfully", data: buyerOrder });
+    return res.status(200).json({ message: "order updated successfully" });
   } catch (error) {
     return res
       .status(500)
@@ -47,16 +46,14 @@ const updateBuyerOrder = async (req, res) => {
 };
 
 const deleteBuyerOrder = async (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
   try {
     const buyerOrder = await BuyerOrder.destroy({
       where: {
         id,
       },
     });
-    return res
-      .status(200)
-      .json({ message: "order deleted successfully", data: buyerOrder });
+    return res.status(200).json({ message: "order deleted successfully" });
   } catch (error) {
     return res
       .status(500)
