@@ -29,12 +29,11 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.BuyerOrder = require("./buyerOrder")(sequelize, DataTypes);
 db.DataPackageType = require("./dataPackageType")(sequelize, DataTypes);
+db.BuyerOrder = require("./buyerOrder")(sequelize, DataTypes);
 
-// Re sync db
-db.sequelize.sync({ force: false }).then(() => {
-  console.log("yes re-sync done!");
+db.BuyerOrder.belongsTo(db.DataPackageType, {
+  foreignKey: "data_package_type_id",
 });
 
 module.exports = db;

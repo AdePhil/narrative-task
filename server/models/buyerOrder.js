@@ -7,17 +7,11 @@ module.exports = (sequelize, DataTypes) => {
     max_bid_price: {
       type: DataTypes.DECIMAL(12, 2),
     },
-    data_package_type_id: {
-      type: DataTypes.INTEGER,
-    },
   });
 
-  BuyerOrder.associate = function (models) {
-    BuyerOrder.belongsTo(models.DataPackageType, {
-      foreignKey: "data_package_type_id",
-      as: "data_package_type",
-    });
-  };
+  // BuyerOrder.associate = function (models) {
+
+  // };
 
   return BuyerOrder;
 };
