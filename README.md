@@ -4,7 +4,7 @@ A simple application to create, read, update and delete buyer's order. Built wit
 
 ## Backend Setup
 
-The backend runs on a node/express server. MySQL is the database of choice and Sequilize ORM is used to interacting with the database.
+The backend runs on a node/express server. MySQL is the database of choice and Sequilize ORM is used to interact with the database.
 
 ### - Navigate to the server folder and install the depencencies
 
@@ -176,9 +176,9 @@ Sample Response
 
 ## Frontend Setup
 
-The frontend runs on a Vue.js. It uses Vuetify and Tacklebox component library as the compinent libraries of choice.
+The frontend runs on a Vue.js. It uses [Vuetify](https://vuetifyjs.com/en/) and [Tacklebox](https://docs.narrative.dev/tacklebox) as the component libraries of choice.
 
-### - Navigate to clinet server folder and install the depencencies
+### - Navigate to client folder and install the depencencies
 
 ```
 yarn install
