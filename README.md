@@ -111,7 +111,7 @@ Sample Response
   "data": [
     {
       "id": 1,
-      "name": "Monilola Oyeyinka",
+      "name": "First Order",
       "max_bid_price": "50000.00",
       "createdAt": "2022-01-06T09:21:57.000Z",
       "updatedAt": "2022-01-06T09:21:57.000Z",
@@ -125,7 +125,7 @@ Sample Response
     },
     {
       "id": 3,
-      "name": "Max Otwell",
+      "name": "Second Order",
       "max_bid_price": "50000.00",
       "createdAt": "2022-01-06T10:42:19.000Z",
       "updatedAt": "2022-01-06T10:42:19.000Z",
@@ -147,19 +147,24 @@ Sample Response
 Sample Payload
 {
   "max_bid_price": 2000,
-  "name": "Alex Anderson",
+  "name": "Second Order",
   "data_package_type_id": 1
 }
 
 Sample Response
 {
-  "message": "Order updated successfully",
-  "data": {
-    "id": 3,
-    "name": "ID Mapping",
-    "updatedAt": "2022-01-06T09:21:46.689Z",
-    "createdAt": "2022-01-06T09:21:46.689Z"
-  }
+      "id": 2,
+      "name": "Second Order",
+      "max_bid_price": "50000.00",
+      "createdAt": "2022-01-06T10:42:19.000Z",
+      "updatedAt": "2022-01-06T10:42:19.000Z",
+      "data_package_type_id": 1,
+      "data_package_type": {
+        "id": 1,
+        "name": "Device Location",
+        "createdAt": "2022-01-06T09:20:44.000Z",
+        "updatedAt": "2022-01-06T09:20:44.000Z"
+      }
 }
 
 6. DELETE - Update buyers order

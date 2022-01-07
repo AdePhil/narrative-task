@@ -10,7 +10,7 @@
 
       <nio-text-field
         v-model="form.name"
-        :label="'Full Name'"
+        :label="'Order Name'"
         :disabled="saving"
       ></nio-text-field>
       <nio-text-field
