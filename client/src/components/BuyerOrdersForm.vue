@@ -1,7 +1,12 @@
 <template>
-  <v-dialog v-model="showForm" max-width="600px" persistent>
+  <v-dialog
+    v-model="showForm"
+    max-width="600px"
+    persistent
+    class="overflow-hidden"
+  >
     <v-card class="px-4">
-      <v-card-title class="text-h5 pl-0"> Order's Form </v-card-title>
+      <v-card-title class="text-h5 pl-0">Fill Order</v-card-title>
 
       <nio-text-field
         v-model="form.name"
@@ -27,7 +32,7 @@
         <v-btn
           color="red lighten-3"
           text
-          @click="$emit('handleHideForm')"
+          @click="hideForm()"
           :disabled="saving"
         >
           cancel
@@ -60,6 +65,17 @@ export default {
     };
   },
   methods: {
+    resetForm() {
+      this.form = {
+        name: "",
+        max_bid_price: "",
+        data_package_type_id: "",
+      };
+    },
+    hideForm() {
+      this.$emit("handleHideForm");
+      this.resetForm();
+    },
     async save() {
       //simulate network request
       const { id, ...payload } = this.form;

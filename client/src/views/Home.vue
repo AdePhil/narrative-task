@@ -3,7 +3,7 @@
     <div class="container">
       <div class="mt-6 d-flex justify-space-between align-center mb-6">
         <h3 class="mt-0 mb-0 headline">Buyers Order</h3>
-        <NioButton @click="handleShowForm">
+        <NioButton @click="addBuyerOrder">
           <nio-icon name="utility-plus" size="16" color="#fff"></nio-icon>
           &nbsp; Add Order
         </NioButton>
@@ -87,6 +87,10 @@ export default {
     };
   },
   methods: {
+    addBuyerOrder() {
+      this.selectedOrder = {};
+      this.handleShowForm();
+    },
     handleShowForm() {
       this.showForm = true;
     },
