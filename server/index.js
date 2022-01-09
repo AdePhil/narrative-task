@@ -7,7 +7,7 @@ const app = express();
 
 // Re sync db
 const db = require("./models/index");
-db.sequelize.sync({ force: false }).then(() => {
+db.sequelize.sync({ force: true }).then(() => {
   console.log("yes re-sync done!");
 });
 
@@ -15,7 +15,7 @@ db.sequelize.sync({ force: false }).then(() => {
 app.use(express.json());
 app.use(
   express.urlencoded({
-    extended: true,
+    extended: false,
   })
 );
 app.use(cors("*"));
