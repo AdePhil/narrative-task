@@ -1,13 +1,24 @@
 const { BuyerOrder, DataPackageType } = require("../models");
 
 const createBuyerOrder = async (req, res) => {
+  //Check if data package type exist
+  try {
+    const { data_package_type_id } = req.body;
+    const packageType = await DataPackageType.findByPk(data_package_type_id);
+    if (!packageType) {
+      return res.status(499).json({ message: "Package type does not exist" });
+    }
+  } catch (error) {
+    return res.status(500).json({ message: "Error updating buyer order." });
+  }
+
   try {
     const buyerOrder = await BuyerOrder.create(req.body);
     return res
       .status(201)
       .json({ message: "order created successfully", data: buyerOrder });
   } catch (error) {
-    return res.status(500).json({ message: "Error saving buyer order to db" });
+    return res.status(500).json({ message: "Error saving buyer order." });
   }
 };
 const findAllBuyerOrder = async (req, res) => {
@@ -22,15 +33,23 @@ const findAllBuyerOrder = async (req, res) => {
       .json({ message: "order retrieved successfully", data: buyerOrder });
   } catch (error) {
     console.log({ error });
-    return res
-      .status(500)
-      .json({ message: "Error getting buyer orders from db" });
+    return res.status(500).json({ message: "Error getting buyer orders." });
   }
 };
 
 const updateBuyerOrder = async (req, res) => {
   const { id } = req.params;
-  console.log({ id }, req.body);
+
+  // Check if order exists
+  try {
+    const buyerOrder = await BuyerOrder.findByPk(id);
+    if (!buyerOrder) {
+      return res.status(499).json({ message: "This order does not exist" });
+    }
+  } catch (error) {
+    return res.status(500).json({ message: "Error updating buyer order." });
+  }
+  //update order
   try {
     const buyerOrder = await BuyerOrder.update(req.body, {
       where: {
@@ -39,14 +58,22 @@ const updateBuyerOrder = async (req, res) => {
     });
     return res.status(200).json({ message: "order updated successfully" });
   } catch (error) {
-    return res
-      .status(500)
-      .json({ message: "Error updating buyer order to db" });
+    return res.status(500).json({ message: "Error updating buyer order." });
   }
 };
 
 const deleteBuyerOrder = async (req, res) => {
   const { id } = req.params;
+
+  // Check if order exists
+  try {
+    const buyerOrder = await BuyerOrder.findByPk(id);
+    if (!buyerOrder) {
+      return res.status(499).json({ message: "This order does not exist" });
+    }
+  } catch (error) {
+    return res.status(500).json({ message: "Error deleting buyer order." });
+  }
   try {
     const buyerOrder = await BuyerOrder.destroy({
       where: {
@@ -55,9 +82,7 @@ const deleteBuyerOrder = async (req, res) => {
     });
     return res.status(200).json({ message: "order deleted successfully" });
   } catch (error) {
-    return res
-      .status(500)
-      .json({ message: "Error deleting buyer order to db" });
+    return res.status(500).json({ message: "Error deleting buyer order." });
   }
 };
 
