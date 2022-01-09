@@ -100,7 +100,10 @@ export default {
     removeBuyerOrder(id) {
       this.loading = true;
       deleteBuyerOrder(id)
-        .then(() => {
+        .then((res) => {
+          this.$toast.success(res.data.message, {
+            timeout: 2000,
+          });
           this.fetchBuyerOrders();
         })
         .catch(() => {
@@ -117,7 +120,6 @@ export default {
       this.handleShowForm();
     },
     saveCallback() {
-      this.handleHideForm();
       this.fetchBuyerOrders();
     },
     fetchBuyerOrders() {

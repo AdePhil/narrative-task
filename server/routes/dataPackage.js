@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const dataPackageTypeController = require("../controller/dataPackage");
-router.post("/create", dataPackageTypeController.createDataPackage);
-router.get("/all", dataPackageTypeController.getDataPackage);
+router.post("/", dataPackageTypeController.createDataPackage);
+router.get("/", dataPackageTypeController.getDataPackage);
 
 module.exports = router;

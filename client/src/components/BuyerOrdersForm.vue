@@ -73,8 +73,8 @@ export default {
       };
     },
     hideForm() {
-      this.$emit("handleHideForm");
       this.resetForm();
+      this.$emit("handleHideForm");
     },
     async save() {
       //simulate network request
@@ -84,15 +84,19 @@ export default {
         this.handleEdit(id, payload);
         return;
       }
-      this.handleSave(payload);
+      this.handleCreate(payload);
     },
-    handleSave(payload) {
+    handleCreate(payload) {
       this.saving = true;
       window.setTimeout(() => {
         saveBuyerOrder(payload)
-          .then(() => {
+          .then((res) => {
+            this.hideForm();
             this.$emit("saveCallback");
             this.saving = false;
+            this.$toast.success(res.data.message, {
+              timeout: 2000,
+            });
           })
           .catch((error) => {
             console.log(error.message);
@@ -103,9 +107,13 @@ export default {
       this.saving = true;
       window.setTimeout(() => {
         updateBuyerOrder(id, payload)
-          .then(() => {
+          .then((res) => {
+            this.hideForm();
             this.$emit("saveCallback");
             this.saving = false;
+            this.$toast.success(res.data.message, {
+              timeout: 2000,
+            });
           })
           .catch((error) => {
             console.log(error.message);

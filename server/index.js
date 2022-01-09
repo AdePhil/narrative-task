@@ -21,10 +21,8 @@ app.use(
 app.use(cors("*"));
 
 // routes
-const dataPackageRouter = require("./routes/dataPackage");
-const buyerOrderRouter = require("./routes/buyerOrder");
-app.use("/api/data-package-type", dataPackageRouter);
-app.use("/api/buyer-order", buyerOrderRouter);
+const routes = require("./routes");
+app.use("/api/v1", routes);
 
 //start server
 const PORT = process.env.PORT;
