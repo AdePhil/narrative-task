@@ -7,7 +7,7 @@ const app = express();
 
 // Re sync db
 const db = require("./models/index");
-db.sequelize.sync({ force: true }).then(() => {
+db.sequelize.sync({ force: false }).then(() => {
   console.log("yes re-sync done!");
 });
 
