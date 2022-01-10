@@ -4,7 +4,7 @@ const createDataPackage = async (req, res) => {
   try {
     const dataPackage = await dataPackageService.createDataPackage(req.body);
     return res.status(201).json({
-      message: "Data package type created successfully",
+      message: "Data package type created successfully.",
       data: dataPackage,
     });
   } catch (error) {
@@ -16,7 +16,7 @@ const getDataPackage = async (req, res) => {
   try {
     const dataPackage = await dataPackageService.getDataPackage();
     return res.status(200).json({
-      message: "Data package type created successfully",
+      message: "Data package types retrieved created successfully.",
       data: dataPackage,
     });
   } catch (error) {
