@@ -7,7 +7,6 @@ const schemaValidator = (schema) => {
     if (!error) {
       next();
     } else {
-      console.log("here", error.details);
       const message = error.details.map((i) => i.message).join(",");
       const refineMessage = message.replace(/["']+/g, "");
       res.status(422).json({ message: refineMessage });
