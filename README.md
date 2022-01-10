@@ -46,12 +46,12 @@ Sample Payload
 
 Sample Response
 {
-  "message": "Data package type created successfully",
+  "message": "Data package type created successfully.",
   "data": {
     "id": 3,
     "name": "ID Mapping",
-    "updatedAt": "2022-01-06T09:21:46.689Z",
-    "createdAt": "2022-01-06T09:21:46.689Z"
+    "updated_at": "2022-01-10T08:47:40.972Z",
+    "created_at": "2022-01-10T08:47:40.972Z"
   }
 }
 
@@ -59,26 +59,26 @@ Sample Response
 
 Sample Response
 {
-  "message": "Data package type created successfully",
+  "message": "Data package types retrieved created successfully.",
   "data": [
-    {
+     {
       "id": 1,
       "name": "Device Location",
-      "createdAt": "2022-01-06T09:20:44.000Z",
-      "updatedAt": "2022-01-06T09:20:44.000Z"
+      "created_at": "2022-01-09T12:30:23.000Z",
+      "updated_at": "2022-01-09T12:30:23.000Z"
     },
     {
       "id": 2,
-      "name": "Device Behavior",
-      "createdAt": "2022-01-06T09:21:31.000Z",
-      "updatedAt": "2022-01-06T09:21:31.000Z"
+      "name": "Device Dehaviour",
+      "created_at": "2022-01-09T12:30:34.000Z",
+      "updated_at": "2022-01-09T12:30:34.000Z"
     },
     {
       "id": 3,
       "name": "ID Mapping",
-      "createdAt": "2022-01-06T09:21:46.000Z",
-      "updatedAt": "2022-01-06T09:21:46.000Z"
-    }
+      "created_at": "2022-01-09T12:31:02.000Z",
+      "updated_at": "2022-01-09T12:31:02.000Z"
+    },
   ]
 }
 
@@ -87,56 +87,127 @@ Sample Response
 
 Sample Payload
 {
-  "max_bid_price": 2000,
-  "name": "Alex Anderson",
-  "data_package_type_id": 1
+  "max_bid_price": "70000",
+  "name": "Order identity data",
+  "data_package_type_id": 3
 }
 
 Sample Response
 {
-  "message": "Data package type created successfully",
   "data": {
-    "id": 3,
-    "name": "ID Mapping",
-    "updatedAt": "2022-01-06T09:21:46.689Z",
-    "createdAt": "2022-01-06T09:21:46.689Z"
-  }
+    "id": 6,
+    "max_bid_price": "70000",
+    "name": "Order identity data",
+    "data_package_type_id": 3,
+    "updated_at": "2022-01-10T08:53:32.552Z",
+    "created_at": "2022-01-10T08:53:32.552Z"
+  },
+  "message": "Order created successfully."
 }
 
 4. GET - Get all buyers order
 
 Sample Response
 {
-  "message": "order retrieved successfully",
+  "message": "Order retrieved successfully.",
   "data": [
     {
-      "id": 1,
-      "name": "First Order",
-      "max_bid_price": "50000.00",
-      "createdAt": "2022-01-06T09:21:57.000Z",
-      "updatedAt": "2022-01-06T09:21:57.000Z",
-      "data_package_type_id": 3,
-      "data_package_type": {
-        "id": 3,
-        "name": "ID Mapping",
-        "createdAt": "2022-01-06T09:21:46.000Z",
-        "updatedAt": "2022-01-06T09:21:46.000Z"
-      }
-    },
-    {
-      "id": 3,
-      "name": "Second Order",
-      "max_bid_price": "50000.00",
-      "createdAt": "2022-01-06T10:42:19.000Z",
-      "updatedAt": "2022-01-06T10:42:19.000Z",
+      "id": 2,
+      "name": "Order map data 1",
+      "max_bid_price": "6000.00",
+      "created_at": "2022-01-09T12:32:09.000Z",
+      "updated_at": "2022-01-09T12:32:09.000Z",
       "data_package_type_id": 1,
       "data_package_type": {
         "id": 1,
         "name": "Device Location",
-        "createdAt": "2022-01-06T09:20:44.000Z",
-        "updatedAt": "2022-01-06T09:20:44.000Z"
+        "created_at": "2022-01-09T12:30:23.000Z",
+        "updated_at": "2022-01-09T12:30:23.000Z"
       }
     },
+    {
+      "id": 3,
+      "name": "Order 100",
+      "max_bid_price": "70000.00",
+      "created_at": "2022-01-09T12:32:18.000Z",
+      "updated_at": "2022-01-10T11:26:55.000Z",
+      "data_package_type_id": 3,
+      "data_package_type": {
+        "id": 3,
+        "name": "ID Mapping",
+        "created_at": "2022-01-09T12:31:02.000Z",
+        "updated_at": "2022-01-09T12:31:02.000Z"
+      }
+    },
+    {
+      "id": 4,
+      "name": "Order map data 4",
+      "max_bid_price": "7000.00",
+      "created_at": "2022-01-09T12:32:44.000Z",
+      "updated_at": "2022-01-09T12:32:44.000Z",
+      "data_package_type_id": 2,
+      "data_package_type": {
+        "id": 2,
+        "name": "Device Dehaviour",
+        "created_at": "2022-01-09T12:30:34.000Z",
+        "updated_at": "2022-01-09T12:30:34.000Z"
+      }
+    },
+    {
+      "id": 5,
+      "name": "Order map data 6",
+      "max_bid_price": "7000.00",
+      "created_at": "2022-01-09T19:43:19.000Z",
+      "updated_at": "2022-01-09T19:43:19.000Z",
+      "data_package_type_id": 2,
+      "data_package_type": {
+        "id": 2,
+        "name": "Device Dehaviour",
+        "created_at": "2022-01-09T12:30:34.000Z",
+        "updated_at": "2022-01-09T12:30:34.000Z"
+      }
+    },
+    {
+      "id": 6,
+      "name": "Order identity data",
+      "max_bid_price": "70000.00",
+      "created_at": "2022-01-10T08:53:32.000Z",
+      "updated_at": "2022-01-10T08:53:32.000Z",
+      "data_package_type_id": 3,
+      "data_package_type": {
+        "id": 3,
+        "name": "ID Mapping",
+        "created_at": "2022-01-09T12:31:02.000Z",
+        "updated_at": "2022-01-09T12:31:02.000Z"
+      }
+    },
+    {
+      "id": 7,
+      "name": "Order Behaviour Data",
+      "max_bid_price": "70000.00",
+      "created_at": "2022-01-10T09:33:05.000Z",
+      "updated_at": "2022-01-10T09:33:05.000Z",
+      "data_package_type_id": 2,
+      "data_package_type": {
+        "id": 2,
+        "name": "Device Dehaviour",
+        "created_at": "2022-01-09T12:30:34.000Z",
+        "updated_at": "2022-01-09T12:30:34.000Z"
+      }
+    },
+    {
+      "id": 8,
+      "name": "Order Behaviour Data 2",
+      "max_bid_price": "70000.00",
+      "created_at": "2022-01-10T09:35:31.000Z",
+      "updated_at": "2022-01-10T09:35:31.000Z",
+      "data_package_type_id": 2,
+      "data_package_type": {
+        "id": 2,
+        "name": "Device Dehaviour",
+        "created_at": "2022-01-09T12:30:34.000Z",
+        "updated_at": "2022-01-09T12:30:34.000Z"
+      }
     }
   ]
 }
@@ -153,18 +224,7 @@ Sample Payload
 
 Sample Response
 {
-      "id": 2,
-      "name": "Second Order",
-      "max_bid_price": "50000.00",
-      "createdAt": "2022-01-06T10:42:19.000Z",
-      "updatedAt": "2022-01-06T10:42:19.000Z",
-      "data_package_type_id": 1,
-      "data_package_type": {
-        "id": 1,
-        "name": "Device Location",
-        "createdAt": "2022-01-06T09:20:44.000Z",
-        "updatedAt": "2022-01-06T09:20:44.000Z"
-      }
+  "message": "Order updated successfully."
 }
 
 6. DELETE - Update buyers order
@@ -173,7 +233,7 @@ Sample Response
 
 Sample Response
 {
-  "message": "Order deleted successfully"
+  "message": "Order deleted successfully."
 }
 
 
