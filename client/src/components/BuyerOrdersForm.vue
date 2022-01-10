@@ -52,11 +52,9 @@
 </template>
 
 <script>
-import { saveBuyerOrder, updateBuyerOrder } from "../services/buyerorder";
 export default {
   data() {
     return {
-      saving: false,
       form: {
         name: "",
         max_bid_price: "",
@@ -79,7 +77,6 @@ export default {
     async save() {
       //simulate network request
       const { id, ...payload } = this.form;
-      console.log({ id });
       if (id) {
         this.handleEdit(id, payload);
         return;
@@ -87,50 +84,17 @@ export default {
       this.handleCreate(payload);
     },
     handleCreate(payload) {
-      this.saving = true;
-      // simulate loading state
-      window.setTimeout(() => {
-        saveBuyerOrder(payload)
-          .then((res) => {
-            this.hideForm();
-            this.$emit("saveCallback");
-            this.saving = false;
-            this.$toast.success(res.data.message, {
-              timeout: 2000,
-            });
-          })
-          .catch((error) => {
-            this.saving = false;
-            const message = error.response?.data?.message;
-            this.$toast.error(message, {
-              timeout: 2000,
-            });
-          });
-      }, 1500);
+      this.$emit("handleCreate", payload);
     },
     handleEdit(id, payload) {
-      this.saving = true;
-      window.setTimeout(() => {
-        updateBuyerOrder(id, payload)
-          .then((res) => {
-            this.hideForm();
-            this.$emit("saveCallback");
-            this.saving = false;
-            this.$toast.success(res.data.message, {
-              timeout: 2000,
-            });
-          })
-          .catch((error) => {
-            this.saving = false;
-            const message = error.response?.data?.message;
-            this.$toast.success(message, {
-              timeout: 2000,
-            });
-          });
-      }, 1500);
+      this.$emit("handleEdit", { id, payload });
     },
   },
   props: {
+    saving: {
+      type: Boolean,
+      default: false,
+    },
     showForm: {
       type: Boolean,
       default: false,

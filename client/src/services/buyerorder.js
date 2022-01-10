@@ -1,7 +1,7 @@
 import Axios from "../config/axios";
 
 export function getBuyerOrders() {
-  return Axios.get(`/buyer-orders`).then((res) => res.data);
+  return Axios.get(`/buyer-orders`);
 }
 
 export function saveBuyerOrder(payload) {
@@ -17,5 +17,5 @@ export function deleteBuyerOrder(id) {
 }
 
 export function getDataPackageType() {
-  return Axios.get(`/package-types/`).then((res) => res.data);
+  return Axios.get(`/package-types/`);
 }

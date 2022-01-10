@@ -38,9 +38,11 @@
         :showForm="showForm"
         @handleShowForm="handleShowForm"
         @handleHideForm="handleHideForm"
+        @handleCreate="handleCreate"
+        @handleEdit="handleEdit"
         :dataPackageOptions="dataPackageOptions"
-        @saveCallback="saveCallback"
         :selectedOrder="selectedOrder"
+        :saving="saving"
       />
     </div>
   </div>
@@ -53,42 +55,26 @@ import {
   getBuyerOrders,
   getDataPackageType,
   deleteBuyerOrder,
+  saveBuyerOrder,
+  updateBuyerOrder,
 } from "../services/buyerorder";
+import buyersOrderTableMixin from "../mixins/buyersOrderTableMixin";
 export default {
   name: "Home",
   components: { Loader, BuyerOrdersForm },
+  mixins: [buyersOrderTableMixin],
   data() {
     return {
       selectedOrder: {},
       showForm: false,
+      saving: false,
       loading: false,
       dataPackageOptions: [],
-      columns: null,
-      searchableProps: ["name", "package_name", "max_bid_price"],
-      sortOptions: [
-        {
-          label: "Name [A-Z]",
-          value: {
-            itemProp: "name",
-            propType: "String",
-            order: "ascending",
-          },
-        },
-        {
-          label: "Name [Z-A]",
-          value: {
-            itemProp: "name",
-            propType: "String",
-            order: "descending",
-          },
-        },
-      ],
       items: [],
     };
   },
   methods: {
     addBuyerOrder() {
-      this.selectedOrder = {};
       this.handleShowForm();
     },
     handleShowForm() {
@@ -101,13 +87,16 @@ export default {
       this.loading = true;
       deleteBuyerOrder(id)
         .then((res) => {
-          this.$toast.success(res.data.message, {
+          this.$toast.success(res.message, {
             timeout: 2000,
           });
           this.fetchBuyerOrders();
         })
-        .catch(() => {
+        .catch((error) => {
           this.loading = false;
+          this.$toast.error(error.message, {
+            timeout: 2000,
+          });
         });
     },
     handleEditForm(item) {
@@ -119,8 +108,46 @@ export default {
       };
       this.handleShowForm();
     },
-    saveCallback() {
-      this.fetchBuyerOrders();
+    handleCreate(payload) {
+      this.saving = true;
+      // simulate loading state
+      window.setTimeout(() => {
+        saveBuyerOrder(payload)
+          .then((res) => {
+            this.handleHideForm();
+            this.fetchBuyerOrders();
+            this.saving = false;
+            this.$toast.success(res.message, {
+              timeout: 2000,
+            });
+          })
+          .catch((error) => {
+            this.saving = false;
+            this.$toast.error(error.message, {
+              timeout: 2000,
+            });
+          });
+      }, 1500);
+    },
+    handleEdit({ id, payload }) {
+      this.saving = true;
+      window.setTimeout(() => {
+        updateBuyerOrder(id, payload)
+          .then((res) => {
+            this.handleHideForm();
+            this.fetchBuyerOrders();
+            this.saving = false;
+            this.$toast.success(res.message, {
+              timeout: 2000,
+            });
+          })
+          .catch((error) => {
+            this.saving = false;
+            this.$toast.error(error.message, {
+              timeout: 2000,
+            });
+          });
+      }, 1500);
     },
     fetchBuyerOrders() {
       this.loading = true;
@@ -128,16 +155,17 @@ export default {
       window.setTimeout(() => {
         getBuyerOrders()
           .then((res) => {
+            this.loading = false;
             this.items = res.data.map((item) => ({
               package_name: item?.data_package_type?.name,
               ...item,
             }));
           })
           .catch((error) => {
-            console.log(error);
-          })
-          .finally(() => {
             this.loading = false;
+            this.$toast.error(error.message, {
+              timeout: 2000,
+            });
           });
       }, 1500);
     },
@@ -150,37 +178,15 @@ export default {
           value: dataPackage.id,
         }));
       } catch (error) {
-        console.log(error.message);
+        this.$toast.error(error.message, {
+          timeout: 2000,
+        });
       }
-    },
-    menuItemClicked() {},
-    makeColumns() {
-      this.columns = [
-        {
-          name: "slat",
-          props: {
-            image: "imageSrc",
-            title: "name",
-            subtitle: "max_bid_price",
-          },
-        },
-        {
-          name: "max_bid_price",
-          label: "Max Bid",
-        },
-        {
-          name: "package_name",
-          label: "Data Type",
-        },
-        {},
-        {},
-      ];
     },
   },
   mounted() {
     this.fetchBuyerOrders();
     this.fetchDataPackageType();
-    this.makeColumns();
   },
 };
 </script>
