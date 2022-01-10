@@ -1,13 +1,24 @@
 const Joi = require("joi");
 
 const schema = {
-  BODY: Joi.object({
-    name: Joi.string().required(),
-    max_bid_price: Joi.number().min(1).required(),
-    data_package_type_id: Joi.number().min(1).required(),
-  }).strict(),
-  ID: Joi.object({
-    id: Joi.number().min(1).required(),
+  CREATE: Joi.object({
+    name: Joi.string().required().label("Order name"),
+    max_bid_price: Joi.number().min(1).required().label("Max bid price"),
+    data_package_type_id: Joi.number()
+      .min(1)
+      .required()
+      .label("Data Package type"),
+  }),
+  UPDATE: Joi.object({
+    name: Joi.string().required().label("Order name"),
+    max_bid_price: Joi.number().min(1).required().label("Max bid price"),
+    data_package_type_id: Joi.number()
+      .min(1)
+      .required()
+      .label("Data Package type"),
+  }),
+  DELETE: Joi.object({
+    id: Joi.number().min(1).required().label("Id"),
   }),
 };
 

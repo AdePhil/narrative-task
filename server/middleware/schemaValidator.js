@@ -1,13 +1,15 @@
 const Joi = require("joi");
 
-const schemaValidator = (schema, property) => {
+const schemaValidator = (schema) => {
   return (req, res, next) => {
-    const { error, details } = schema.validate(req[property]);
+    const payload = { ...req.body, ...req.params, ...req.query };
+    const { error, details } = schema.validate(payload);
     if (!error) {
       next();
     } else {
       const message = error.details.map((i) => i.message).join(",");
-      res.status(422).json({ message });
+      const refineMessage = message.replace(/["']+/g, "");
+      res.status(422).json({ message: refineMessage });
     }
   };
 };

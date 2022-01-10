@@ -1,24 +1,17 @@
+const { buyerOrderService } = require("../service");
 const { BuyerOrder, DataPackageType } = require("../models");
 
 const createBuyerOrder = async (req, res) => {
-  //Check if data package type exist
   try {
-    const { data_package_type_id } = req.body;
-    const packageType = await DataPackageType.findByPk(data_package_type_id);
-    if (!packageType) {
-      return res.status(499).json({ message: "Package type does not exist" });
-    }
-  } catch (error) {
-    return res.status(500).json({ message: "Error updating buyer order." });
-  }
-
-  try {
-    const buyerOrder = await BuyerOrder.create(req.body);
+    const buyerOrder = await buyerOrderService.createBuyerOrder(req.body);
     return res
       .status(201)
-      .json({ message: "order created successfully", data: buyerOrder });
+      .json({ data: buyerOrder, message: "Order created successfully." });
   } catch (error) {
-    return res.status(500).json({ message: "Error saving buyer order." });
+    console.log({ error });
+    const errorMessage = error?.message || "Error updating buyer order.";
+    const errorStatus = error.status || 500;
+    return res.status(errorStatus).json({ message: errorMessage });
   }
 };
 const findAllBuyerOrder = async (req, res) => {

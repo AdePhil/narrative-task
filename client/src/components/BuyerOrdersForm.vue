@@ -88,6 +88,7 @@ export default {
     },
     handleCreate(payload) {
       this.saving = true;
+      // simulate loading state
       window.setTimeout(() => {
         saveBuyerOrder(payload)
           .then((res) => {
@@ -99,7 +100,11 @@ export default {
             });
           })
           .catch((error) => {
-            console.log(error.message);
+            this.saving = false;
+            const message = error.response?.data?.message;
+            this.$toast.error(message, {
+              timeout: 2000,
+            });
           });
       }, 1500);
     },
@@ -116,7 +121,11 @@ export default {
             });
           })
           .catch((error) => {
-            console.log(error.message);
+            this.saving = false;
+            const message = error.response?.data?.message;
+            this.$toast.success(message, {
+              timeout: 2000,
+            });
           });
       }, 1500);
     },

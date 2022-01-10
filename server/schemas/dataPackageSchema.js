@@ -1,8 +1,8 @@
 const Joi = require("joi");
 
 const schema = {
-  BODY: Joi.object({
-    name: Joi.string().required(),
+  POST: Joi.object({
+    name: Joi.string().required().label("Order name"),,
   }).strict(),
 };
 

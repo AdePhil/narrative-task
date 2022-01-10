@@ -5,19 +5,18 @@ const { buyerOrderSchema } = require("../schemas");
 
 router.post(
   "/",
-  schemaValidator(buyerOrderSchema.BODY, "body"),
+  schemaValidator(buyerOrderSchema.CREATE),
   buyerOrderController.createBuyerOrder
 );
 router.get("/", buyerOrderController.findAllBuyerOrder);
 router.delete(
   "/:id",
-  schemaValidator(buyerOrderSchema.ID, "params"),
+  schemaValidator(buyerOrderSchema.DELETE),
   buyerOrderController.deleteBuyerOrder
 );
 router.patch(
   "/:id",
-  schemaValidator(buyerOrderSchema.ID, "params"),
-  schemaValidator(buyerOrderSchema.BODY, "body"),
+  schemaValidator(buyerOrderSchema.UPDATE),
   buyerOrderController.updateBuyerOrder
 );
 

@@ -1,31 +1,21 @@
-import axios from "axios";
+import Axios from "../config/axios";
 
 export function getBuyerOrders() {
-  return axios
-    .get(`${process.env.VUE_APP_API_URL}/api/buyer-order/all`)
-    .then((res) => res.data);
+  return Axios.get(`/buyer-orders`).then((res) => res.data);
 }
 
 export function saveBuyerOrder(payload) {
-  return axios.post(
-    `${process.env.VUE_APP_API_URL}/api/buyer-order/create`,
-    payload
-  );
+  return Axios.post(`/buyer-orders`, payload);
 }
 
 export function updateBuyerOrder(id, payload) {
-  return axios.patch(
-    `${process.env.VUE_APP_API_URL}/api/buyer-order/${id}`,
-    payload
-  );
+  return Axios.patch(`/buyer-orders/${id}`, payload);
 }
 
 export function deleteBuyerOrder(id) {
-  return axios.delete(`${process.env.VUE_APP_API_URL}/api/buyer-order/${id}`);
+  return Axios.delete(`/buyer-orders/${id}`);
 }
 
 export function getDataPackageType() {
-  return axios
-    .get(`${process.env.VUE_APP_API_URL}/api/data-package-type/all`)
-    .then((res) => res.data);
+  return Axios.get(`/package-types/`).then((res) => res.data);
 }
