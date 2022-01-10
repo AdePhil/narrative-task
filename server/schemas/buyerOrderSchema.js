@@ -10,6 +10,7 @@ const schema = {
       .label("Data Package type"),
   }),
   UPDATE: Joi.object({
+    id: Joi.number().min(1).required().label("Id"),
     name: Joi.string().required().label("Order name"),
     max_bid_price: Joi.number().min(1).required().label("Max bid price"),
     data_package_type_id: Joi.number()
