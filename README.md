@@ -241,7 +241,7 @@ Sample Response
 
 ## Frontend Setup
 
-The frontend runs on a Vue.js. It uses [Vuetify](https://vuetifyjs.com/en/) and [Tacklebox](https://docs.narrative.dev/tacklebox) as the component libraries of choice.
+The frontend runs on Vue.js. It uses [Vuetify](https://vuetifyjs.com/en/) and [Tacklebox](https://docs.narrative.dev/tacklebox) as the component libraries of choice.
 
 ### - Navigate to client folder and install the depencencies
 
@@ -255,7 +255,7 @@ yarn install
 VUE_APP_API_URL=http://localhost:8081
 ```
 
-`Note: Make sure this url corresponds to the url your backend is running on (The PORT variable in the backend .env file). Make sure your backend server is also up.`
+`Note: Make sure this url corresponds to the url your backend is running on (The PORT variable in the backend .env file). Make sure your backend server is up.`
 
 ### - Compiles and hot-reloads for development
 
