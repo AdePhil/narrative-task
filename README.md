@@ -12,7 +12,7 @@ The backend runs on a node/express server. MySQL is the database of choice and S
 yarn install
 ```
 
-### - Create an .env file in the server folder (Sample)
+### - Create a .env file in the server folder (Sample)
 
 ```bash
 PORT=8081
