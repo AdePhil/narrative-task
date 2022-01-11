@@ -118,7 +118,7 @@ export default {
   watch: {
     selectedOrder: function (newVal) {
       // watch it
-      this.form = { ...this.form, ...newVal };
+      this.form = { ...newVal };
     },
   },
 };

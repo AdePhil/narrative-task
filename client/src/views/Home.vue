@@ -75,6 +75,7 @@ export default {
   },
   methods: {
     addBuyOrder() {
+      this.selectedOrder = {};
       this.handleShowForm();
     },
     handleShowForm() {
