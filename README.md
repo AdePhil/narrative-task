@@ -254,7 +254,8 @@ yarn install
 ### - Create a .env in the client folder (Sample)
 
 ```bash
-VUE_APP_API_URL=http://localhost:8081
+VUE_APP_API_URL=http://localhost:8081/api/v1/
+
 ```
 
 `Note: Make sure this url corresponds to the url your backend is running on (The PORT variable in the backend .env file). Make sure your backend server is up.`
