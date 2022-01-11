@@ -1,3 +1,5 @@
+import { formatCurrency } from "../utils";
+
 export default {
   data() {
     return {
@@ -24,6 +26,12 @@ export default {
     };
   },
   methods: {
+    computeOrderNumber(item) {
+      return `#${item.id}`;
+    },
+    computeBudget(item) {
+      return formatCurrency(item.max_bid_price);
+    },
     makeColumns() {
       this.columns = [
         {
@@ -31,12 +39,13 @@ export default {
           props: {
             image: "imageSrc",
             title: "name",
-            subtitle: "max_bid_price",
+            subtitle: this.computeOrderNumber,
           },
         },
         {
           name: "max_bid_price",
-          label: "Max Bid",
+          label: "Budget",
+          computed: this.computeBudget,
         },
         {
           name: "package_name",
