@@ -12,7 +12,7 @@ The backend runs on a node/express server. MySQL is the database of choice and S
 yarn install
 ```
 
-### - Create a .env in the server folder (Sample)
+### - Create an .env file in the server folder (Sample)
 
 ```bash
 PORT=8081
@@ -37,7 +37,7 @@ yarn dev
 
 ```bash
 1. POST - Create data package types
-   Endpoint - http://localhost:8081/api/data-package-type/create
+   Endpoint - http://localhost:8081/api/v1/package-types
 
 Sample Payload
 {
@@ -56,6 +56,7 @@ Sample Response
 }
 
 2. GET - Get all data pakage types
+   Endpoint - http://localhost:8081/api/v1/package-types
 
 Sample Response
 {
@@ -83,7 +84,7 @@ Sample Response
 }
 
 3. POST - Create buyers order
-   Endpoint - http://localhost:8081/api/buyer-order/create
+   Endpoint - http://localhost:8081/api/v1/buyer-orders
 
 Sample Payload
 {
@@ -106,6 +107,7 @@ Sample Response
 }
 
 4. GET - Get all buyers order
+   Endpoint - http://localhost:8081/api/v1/buyer-orders
 
 Sample Response
 {
@@ -213,7 +215,7 @@ Sample Response
 }
 
 5. PATCH - Update buyers order
-   Endpoint - http://localhost:8081/api/buyer-order/2
+   Endpoint - http://localhost:8081/api/v1/buyer-orders/2
 
 Sample Payload
 {
@@ -228,7 +230,7 @@ Sample Response
 }
 
 6. DELETE - Update buyers order
-   Endpoint - http://localhost:8081/api/buyer-order/2
+   Endpoint - http://localhost:8081/api/v1/buyer-orders/2
 
 
 Sample Response
@@ -243,7 +245,7 @@ Sample Response
 
 The frontend runs on Vue.js. It uses [Vuetify](https://vuetifyjs.com/en/) and [Tacklebox](https://docs.narrative.dev/tacklebox) as the component libraries of choice.
 
-### - Navigate to client folder and install the depencencies
+### - Navigate to the client folder and install the depencencies
 
 ```
 yarn install
