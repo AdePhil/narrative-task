@@ -84,7 +84,7 @@ Sample Response
 }
 
 3. POST - Create buy order
-   Endpoint - http://localhost:8081/api/v1/buyer-orders
+   Endpoint - http://localhost:8081/api/v1/buy-orders
 
 Sample Payload
 {
@@ -107,7 +107,7 @@ Sample Response
 }
 
 4. GET - Get all buy order
-   Endpoint - http://localhost:8081/api/v1/buyer-orders
+   Endpoint - http://localhost:8081/api/v1/buy-orders
 
 Sample Response
 {
@@ -215,7 +215,7 @@ Sample Response
 }
 
 5. PATCH - Update buy order
-   Endpoint - http://localhost:8081/api/v1/buyer-orders/2
+   Endpoint - http://localhost:8081/api/v1/buy-orders/2
 
 Sample Payload
 {
@@ -230,7 +230,7 @@ Sample Response
 }
 
 6. DELETE - Update buy order
-   Endpoint - http://localhost:8081/api/v1/buyer-orders/2
+   Endpoint - http://localhost:8081/api/v1/buy-orders/2
 
 
 Sample Response
