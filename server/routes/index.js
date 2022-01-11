@@ -1,8 +1,8 @@
 const router = require("express").Router();
-const buyerOrderRoutes = require("./buyerOrder");
+const buyOrderRoutes = require("./buyOrder");
 const dataPackageTypeRoutes = require("./dataPackage");
 
 router.use("/package-types", dataPackageTypeRoutes);
-router.use("/buy-orders", buyerOrderRoutes);
+router.use("/buy-orders", buyOrderRoutes);
 
 module.exports = router;

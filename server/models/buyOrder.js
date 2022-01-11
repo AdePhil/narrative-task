@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
-  const BuyerOrder = sequelize.define(
-    "buyer_order",
+  const BuyOrder = sequelize.define(
+    "buy_order",
     {
       name: {
         type: DataTypes.STRING,
@@ -17,9 +17,5 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  // BuyerOrder.associate = function (models) {
-
-  // };
-
-  return BuyerOrder;
+  return BuyOrder;
 };

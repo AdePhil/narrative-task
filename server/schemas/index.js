@@ -1,6 +1,6 @@
-const buyerOrderSchema = require("./buyerOrderSchema");
-const dataPackageSchema = require("./dataPackageSchema");
+const buyOrderSchema = require("./buyOrder");
+const dataPackageSchema = require("./dataPackage");
 module.exports = {
-  buyerOrderSchema,
+  buyOrderSchema,
   dataPackageSchema,
 };

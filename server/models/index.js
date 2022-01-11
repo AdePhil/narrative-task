@@ -32,9 +32,9 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 db.DataPackageType = require("./dataPackageType")(sequelize, DataTypes);
-db.BuyerOrder = require("./buyerOrder")(sequelize, DataTypes);
+db.BuyOrder = require("./buyOrder")(sequelize, DataTypes);
 
-db.BuyerOrder.belongsTo(db.DataPackageType, {
+db.BuyOrder.belongsTo(db.DataPackageType, {
   foreignKey: "data_package_type_id",
 });
 

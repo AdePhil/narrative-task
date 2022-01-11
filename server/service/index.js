@@ -1,6 +1,6 @@
-const buyerOrderService = require("./buyerOrder");
+const buyOrderService = require("./buyOrder");
 const dataPackageService = require("./dataPackage");
 module.exports = {
-  buyerOrderService,
+  buyOrderService,
   dataPackageService,
 };

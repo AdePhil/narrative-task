@@ -1,7 +1,7 @@
 const { BaseError } = require("../helpers/error");
-const { BuyerOrder, DataPackageType } = require("../models");
+const { BuyOrder, DataPackageType } = require("../models");
 
-const createBuyerOrder = async (payload) => {
+const createBuyOrder = async (payload) => {
   const { data_package_type_id } = payload;
   const packageType = await DataPackageType.findByPk(data_package_type_id);
   if (!packageType) {
@@ -10,29 +10,29 @@ const createBuyerOrder = async (payload) => {
       message: "Package type does not exist",
     });
   }
-  const buyerOrder = await BuyerOrder.create(payload);
-  return buyerOrder;
+  const buyOrder = await BuyOrder.create(payload);
+  return buyOrder;
 };
 
-const findAllBuyerOrder = async () => {
-  const buyerOrder = await BuyerOrder.findAll({
+const findAllBuyOrder = async () => {
+  const buyOrder = await BuyOrder.findAll({
     include: {
       model: DataPackageType,
     },
   });
-  return buyerOrder;
+  return buyOrder;
 };
 
-const updateBuyerOrder = async (id, payload) => {
-  const buyerOrder = await BuyerOrder.findByPk(id);
-  if (!buyerOrder) {
+const updateBuyOrder = async (id, payload) => {
+  const buyOrder = await BuyOrder.findByPk(id);
+  if (!buyOrder) {
     throw new BaseError({
       status: 404,
       message: "This Order does not exist",
     });
   }
 
-  await BuyerOrder.update(payload, {
+  await BuyOrder.update(payload, {
     where: {
       id,
     },
@@ -40,16 +40,16 @@ const updateBuyerOrder = async (id, payload) => {
   return true;
 };
 
-const deleteBuyerOrder = async (id) => {
-  const buyerOrder = await BuyerOrder.findByPk(id);
-  if (!buyerOrder) {
+const deleteBuyOrder = async (id) => {
+  const buyOrder = await BuyOrder.findByPk(id);
+  if (!buyOrder) {
     throw new BaseError({
       status: 404,
       message: "This Order does not exist",
     });
   }
 
-  await BuyerOrder.destroy({
+  await BuyOrder.destroy({
     where: {
       id,
     },
@@ -59,8 +59,8 @@ const deleteBuyerOrder = async (id) => {
 };
 
 module.exports = {
-  createBuyerOrder,
-  findAllBuyerOrder,
-  updateBuyerOrder,
-  deleteBuyerOrder,
+  createBuyOrder,
+  findAllBuyOrder,
+  updateBuyOrder,
+  deleteBuyOrder,
 };
