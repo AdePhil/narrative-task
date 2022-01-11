@@ -6,7 +6,9 @@
     class="overflow-hidden"
   >
     <v-card class="px-4">
-      <v-card-title class="text-h5 pl-0">Fill Order</v-card-title>
+      <v-card-title class="text-h5 pl-0"
+        >{{ isEdit ? "Edit" : "Create" }} Order</v-card-title
+      >
 
       <nio-text-field
         v-model="form.name"
@@ -61,6 +63,11 @@ export default {
         data_package_type_id: "",
       },
     };
+  },
+  computed: {
+    isEdit() {
+      return !!this.form.id;
+    },
   },
   methods: {
     resetForm() {

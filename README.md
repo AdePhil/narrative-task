@@ -1,6 +1,6 @@
 # Narrative-task
 
-A simple application to create, read, update and delete buyer's order. Built with Node.js and Vue.js.
+A simple application to create, read, update and delete buy order. Built with Node.js and Vue.js.
 
 ## Backend Setup
 
@@ -83,7 +83,7 @@ Sample Response
   ]
 }
 
-3. POST - Create buyers order
+3. POST - Create buy order
    Endpoint - http://localhost:8081/api/v1/buyer-orders
 
 Sample Payload
@@ -106,7 +106,7 @@ Sample Response
   "message": "Order created successfully."
 }
 
-4. GET - Get all buyers order
+4. GET - Get all buy order
    Endpoint - http://localhost:8081/api/v1/buyer-orders
 
 Sample Response
@@ -214,7 +214,7 @@ Sample Response
   ]
 }
 
-5. PATCH - Update buyers order
+5. PATCH - Update buy order
    Endpoint - http://localhost:8081/api/v1/buyer-orders/2
 
 Sample Payload
@@ -229,7 +229,7 @@ Sample Response
   "message": "Order updated successfully."
 }
 
-6. DELETE - Update buyers order
+6. DELETE - Update buy order
    Endpoint - http://localhost:8081/api/v1/buyer-orders/2
 
 

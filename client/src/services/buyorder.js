@@ -1,18 +1,18 @@
 import Axios from "../config/axios";
 
-export function getBuyerOrders() {
+export function getBuyOrders() {
   return Axios.get(`/buyer-orders`);
 }
 
-export function saveBuyerOrder(payload) {
+export function saveBuyOrder(payload) {
   return Axios.post(`/buyer-orders`, payload);
 }
 
-export function updateBuyerOrder(id, payload) {
+export function updateBuyOrder(id, payload) {
   return Axios.patch(`/buyer-orders/${id}`, payload);
 }
 
-export function deleteBuyerOrder(id) {
+export function deleteBuyOrder(id) {
   return Axios.delete(`/buyer-orders/${id}`);
 }
 

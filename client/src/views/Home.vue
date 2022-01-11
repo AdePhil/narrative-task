@@ -2,8 +2,8 @@
   <div class="home">
     <div class="container">
       <div class="mt-6 d-flex justify-space-between align-center mb-6">
-        <h3 class="mt-0 mb-0 headline">Buyers Order</h3>
-        <NioButton @click="addBuyerOrder">
+        <h3 class="mt-0 mb-0 headline">Buy Order</h3>
+        <NioButton @click="addBuyOrder">
           <nio-icon name="utility-plus" size="16" color="#fff"></nio-icon>
           &nbsp; Add Order
         </NioButton>
@@ -27,14 +27,14 @@
               <v-list-item @click="handleEditForm(slotProps.item)">
                 Edit
               </v-list-item>
-              <v-list-item @click="removeBuyerOrder(slotProps.item.id)">
+              <v-list-item @click="removeBuyOrder(slotProps.item.id)">
                 Delete
               </v-list-item>
             </v-list>
           </template>
         </nio-slat-table>
       </div>
-      <buyer-orders-form
+      <buy-order-form
         :showForm="showForm"
         @handleShowForm="handleShowForm"
         @handleHideForm="handleHideForm"
@@ -49,20 +49,20 @@
 </template>
 
 <script>
-import BuyerOrdersForm from "../components/BuyerOrdersForm.vue";
+import BuyOrderForm from "../components/BuyOrderForm.vue";
 import Loader from "../components/Loader.vue";
 import {
-  getBuyerOrders,
+  getBuyOrders,
   getDataPackageType,
-  deleteBuyerOrder,
-  saveBuyerOrder,
-  updateBuyerOrder,
-} from "../services/buyerorder";
-import buyersOrderTableMixin from "../mixins/buyersOrderTableMixin";
+  deleteBuyOrder,
+  saveBuyOrder,
+  updateBuyOrder,
+} from "../services/buyorder";
+import buyOrderTableMixin from "../mixins/buyOrderTableMixin";
 export default {
   name: "Home",
-  components: { Loader, BuyerOrdersForm },
-  mixins: [buyersOrderTableMixin],
+  components: { Loader, BuyOrderForm },
+  mixins: [buyOrderTableMixin],
   data() {
     return {
       selectedOrder: {},
@@ -74,7 +74,7 @@ export default {
     };
   },
   methods: {
-    addBuyerOrder() {
+    addBuyOrder() {
       this.handleShowForm();
     },
     handleShowForm() {
@@ -83,14 +83,14 @@ export default {
     handleHideForm() {
       this.showForm = false;
     },
-    removeBuyerOrder(id) {
+    removeBuyOrder(id) {
       this.loading = true;
-      deleteBuyerOrder(id)
+      deleteBuyOrder(id)
         .then((res) => {
           this.$toast.success(res.message, {
             timeout: 2000,
           });
-          this.fetchBuyerOrders();
+          this.fetchBuyOrders();
         })
         .catch((error) => {
           this.loading = false;
@@ -112,10 +112,10 @@ export default {
       this.saving = true;
       // simulate loading state
       window.setTimeout(() => {
-        saveBuyerOrder(payload)
+        saveBuyOrder(payload)
           .then((res) => {
             this.handleHideForm();
-            this.fetchBuyerOrders();
+            this.fetchBuyOrders();
             this.saving = false;
             this.$toast.success(res.message, {
               timeout: 2000,
@@ -132,10 +132,10 @@ export default {
     handleEdit({ id, payload }) {
       this.saving = true;
       window.setTimeout(() => {
-        updateBuyerOrder(id, payload)
+        updateBuyOrder(id, payload)
           .then((res) => {
             this.handleHideForm();
-            this.fetchBuyerOrders();
+            this.fetchBuyOrders();
             this.saving = false;
             this.$toast.success(res.message, {
               timeout: 2000,
@@ -149,11 +149,11 @@ export default {
           });
       }, 1500);
     },
-    fetchBuyerOrders() {
+    fetchBuyOrders() {
       this.loading = true;
       //simulate network request
       window.setTimeout(() => {
-        getBuyerOrders()
+        getBuyOrders()
           .then((res) => {
             this.loading = false;
             this.items = res.data.map((item) => ({
@@ -185,7 +185,7 @@ export default {
     },
   },
   mounted() {
-    this.fetchBuyerOrders();
+    this.fetchBuyOrders();
     this.fetchDataPackageType();
   },
 };
